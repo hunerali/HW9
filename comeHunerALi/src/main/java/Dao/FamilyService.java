@@ -5,7 +5,6 @@ import Abstracts.Human;
 import Abstracts.Humans.Man;
 import Abstracts.Humans.Women;
 import Abstracts.Pet;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -93,5 +92,6 @@ public class FamilyService {
         Set<Pet> pets = family.getPets();
         pets.add(pet);
         family.setPets(pets);
+        collectionFamilyDao.saveFamily(family);
     }
 }
