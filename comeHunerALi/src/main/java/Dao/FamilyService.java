@@ -44,7 +44,7 @@ public class FamilyService {
         return getAllFamilies().size();
     }
 
-    public Family getFamilyByIndex(int index) {
+    public Family getFamilyById(int index) {
         return collectionFamilyDao.getFamilyByIndex(index);
     }
 
@@ -78,7 +78,7 @@ public class FamilyService {
        getAllFamilies().forEach(f ->
                f.getChildren().removeAll(
                f.getChildren().stream().filter(ch ->
-                       LocalDate.now().getYear() - ch.getYear() > age)
+                       LocalDate.now().getYear() - ch.getBirthDate() > age)
                        .collect(Collectors.toList())));
     }
 
@@ -94,4 +94,5 @@ public class FamilyService {
         family.setPets(pets);
         collectionFamilyDao.saveFamily(family);
     }
+
 }

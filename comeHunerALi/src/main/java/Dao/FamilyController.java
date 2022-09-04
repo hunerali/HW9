@@ -44,7 +44,7 @@ public class FamilyController {
     }
 
     public Family getFamilyByIndex(int index) {
-        return familyService.getFamilyByIndex(index);
+        return familyService.getFamilyById(index);
     }
 
     public Family bornChild(Family family, String type) {

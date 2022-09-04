@@ -9,16 +9,17 @@ import java.util.Objects;
 public class Human {
     private String name;
     private String surname;
-    private int year;
+    private Long birthDate;
     private int iq;
     private Map<DayOfWeeks, String> schedule;
     private Family family;
 
 
-    public Human(String name, String surname, int year, int iq, Map<DayOfWeeks, String> schedule, Family family) {
+
+    public Human(String name, String surname, Long birthDate, int iq, Map<DayOfWeeks, String> schedule, Family family) {
         this.setName(name);
         this.setSurname(surname);
-        this.setYear(year);
+        this.setBirthDate(birthDate);
         this.setIq(iq);
         this.setSchedule(schedule);
         this.setFamily(family);
@@ -27,12 +28,18 @@ public class Human {
     public Human() {
     }
 
-    public Human(String name, String surname, int year) {
+    public Human(String name, String surname, Long birthDate) {
         this.setName(name);
         this.setSurname(surname);
-        this.setYear(year);
+        this.setBirthDate(birthDate);
     }
 
+    public Human(String name, String surname, Long birthDate, int iq) {
+        this.name = name;
+        this.surname = surname;
+        this.birthDate = birthDate;
+        this.iq = iq;
+    }
 
     public String getName() {
         return name;
@@ -50,12 +57,12 @@ public class Human {
         this.surname = surname;
     }
 
-    public int getYear() {
-        return year;
+    public Long getBirthDate() {
+        return birthDate;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setBirthDate(Long birthDate) {
+        this.birthDate = birthDate;
     }
 
     public Map<DayOfWeeks, String> getSchedule() {
@@ -92,13 +99,13 @@ public class Human {
             return "com.company.Abstracts.Human{" +
                     "name='" + name + '\'' +
                     ", surname='" + surname + '\'' +
-                    ", year=" + year +
+                    ", year=" + birthDate +
                     '}';
         }
         return "com.company.Abstracts.Human{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", year=" + year +
+                ", year=" + birthDate +
                 ", iq=" + iq +
                 ", schedule=" + schedule +
                 '}';
@@ -114,16 +121,25 @@ public class Human {
 
         return this.name.equals(human.name) &&
                 this.surname.equals(human.surname) &&
-                this.year == human.year;
+                this.birthDate == human.birthDate;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.name, this.surname, this.year);
+        return Objects.hash(this.name, this.surname, this.birthDate);
     }
 
     @Override
     protected void finalize() throws Throwable {
         System.out.println(this.name + " object collected by Garbage Collector");
     }
+    public void describeAge() {
+        long current = System.currentTimeMillis() / 1000;
+        long duration = current - birthDate / 1000;
+        long days = duration / 86400;
+        long month = days / 30;
+        long year = month / 12;
+        System.out.printf("days = %d, months = %d, years = %d", days, month, year);
+    }
+
 }
